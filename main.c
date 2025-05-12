@@ -15,7 +15,7 @@ typedef struct
   char track_genre[100];
 } Song;
   
-// Menú principal
+// Función que muestra el menú principal
 void mostrarMenuPrincipal()
 {
   limpiarPantalla();
@@ -33,10 +33,10 @@ void mostrarMenuPrincipal()
 }
 
 
-// Carga canciones desde un archivo CSV
+// Función para cargar las canciones desde un archivo CSV
 void cargarCanciones(HashMap *SBG, HashMap *SBA, HashMap *SBT) 
 {
-  // Intenta abrir el archivo CSV que contiene datos de películas
+  // Intenta abrir el archivo CSV que contiene los datos de las canciones
   FILE *archivo = fopen("data/song_dataset_.csv", "r");
   if (archivo == NULL)
   {
@@ -51,6 +51,7 @@ void cargarCanciones(HashMap *SBG, HashMap *SBA, HashMap *SBT)
   // Lee cada línea del archivo CSV hasta el final
   while ((campos = leer_linea_csv(archivo, ',')) != NULL)
   {
+    // Se leen los datos del CSV y se guardan
     Song *cancion = (Song *) malloc(sizeof(Song));
     strcpy(cancion->id, campos[0]);
     strcpy(cancion->album_name, campos[3]);
@@ -59,30 +60,32 @@ void cargarCanciones(HashMap *SBG, HashMap *SBA, HashMap *SBT)
     cancion->artists = split_string(campos[2], ";");     
     cancion->tempo = atoi(campos[18]);
 
+    // Se inserta en el mapa SBG las canciones por genero
     insertMap(SBG, cancion->track_genre, cancion);
 
-    // Obtiene el primer género de la lista de géneros de la película
+    // Obtiene el primer artista de la lista de artistas de la canción
     char *artista = list_first(cancion->artists);
-    // Itera sobre cada género de la película
+    // Itera sobre cada artísta de la canción
     while (artista != NULL) {
-      // Busca el género en el mapa pelis_bygenres
+      // Busca el artísta en el mapa SBA
       Pair *pairArtist = searchMap(SBA, artista);
 
-      // Si el género no existe en el mapa, crea una nueva lista y agrégala al mapa
+      // Si el artista no existe en el mapa, se crea una nueva lista y se agrega al mapa
       if (pairArtist == NULL) {
         List *new_list = list_create();
         list_pushBack(new_list, cancion);
         insertMap(SBA, strdup(artista), new_list);
       } else {
-        // Si el género ya existe en el mapa, obtén la lista y agrega la película
+        // Si el artista ya existe en el mapa, obtén la lista y se agrega la canción
         List *genre_list = (List *)pairArtist->value;
         list_pushBack(genre_list, cancion);
       }
 
-      // Avanza al siguiente género en la lista
+      // Avanza al siguiente artista en la lista
       artista = list_next(cancion->artists);
     }
     
+    // Se insertan en el mapa SBT las canciones según el tempo que tengan
     if (cancion->tempo < 80) insertMap(SBT, "Lentas", cancion);
     else if (cancion->tempo >= 80 && cancion->tempo < 120) insertMap(SBT, "Moderadas", cancion);
     else insertMap(SBT, "Rapidas", cancion);
@@ -120,6 +123,7 @@ void imprimirPrimerasCanciones(HashMap *mapa) {
   }
 }
 
+// Función que busca las canciones por sus generos
 void buscarPorGenero(HashMap *SBG)
 {
   limpiarPantalla();
@@ -128,7 +132,7 @@ void buscarPorGenero(HashMap *SBG)
   printf("          BUSQUEDA POR GENERO\n");
   printf("=======================================\n");
   printf("INGRESE EL GENERO DE LA CANCION: ");
-  scanf("%s", genero); // Lee el ID del teclado
+  scanf("%s", genero); // Lee el genero del teclado
 
   Pair *par = searchMap(SBG, genero);
   
@@ -243,9 +247,9 @@ void buscarPorTempo(HashMap *SBT)
 
 int main() 
 {
-  char opcion; // Variable para almacenar una opción ingresada por el usuario (sin uso en este fragmento)
+  char opcion; //Variable para almacenar una opción ingresada por el usuario
 
-  // Crea un mapa para almacenar películas, utilizando una función de comparación que trabaja con claves de tipo string.
+  // Crea los mapas para almacenar las canciones.
   HashMap *songsByGenre = createMap();
   HashMap *songsByArtist = createMap();
   HashMap *songsByTempo = createMap();

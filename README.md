@@ -43,14 +43,14 @@ Este sistema ha sido desarrollado en lenguaje C y puede ejecutarse fácilmente u
 
 ### Funcionando correctamente:
 
-- Cargar las canciones 
-- Asignar o modificar la prioridad de los pacientes.
-- Ver la lista de espera de pacientes, ordenada por prioridad y hora de registro.
-- Atender al siguiente paciente, respetando el orden de prioridad.
+- Cargar las canciones en sus distintas categorias (Genero, Artista, Tempo) 
+- Mostrar un menu interactivo amigable.
+- Buscar las canciones según las distintas categorias y mostrarlas por pantalla.
+- Finalizar el programa.
 
 ### Problemas conocidos:
 
-- La funcionalidad para exportar e importar la lista de espera desde/hacia un archivo CSV aún está en desarrollo.
+- El primer dato no se muestra correctamente.
 
 ### A mejorar:
 
@@ -59,7 +59,22 @@ Este sistema ha sido desarrollado en lenguaje C y puede ejecutarse fácilmente u
 
 ## Ejemplo de uso
 
-**Paso 1: Cargar canciones**
+Para el uso del programa existen varias opciones para selecionar, lascuales se mmuestran en el siguiente menu:
+
+```
+========================================
+       BASE DE DATOS DE CANCIONES
+========================================
+1) CARGAR CANCIONES
+2) BUSCAR POR GENERO
+3) BUSCAR POR ARTISTA
+4) BUSCAR POR TEMPO
+5) SALIR
+========================================
+INGRESE SU OPCION: 
+```
+
+**Opción 1: Cargar canciones**
 
 Se comienza cargando los datos de las canciones.
 
@@ -67,32 +82,85 @@ Se comienza cargando los datos de las canciones.
 INGRESE SU OPCION: 1) CARGAR CANCIONES
 ```
 
-Se cargan las canciones y se reegistran por generos, artistas y tempo.
+Se cargan las canciones y se registran por generos, artistas y tempo.
 
-**Paso 2: Buscar por genero**
+**Opción 2: Buscar por genero**
 
-Tras una evaluación inicial, el médico determina que el estado de Ana requiere atención prioritaria.
+Se buscan las canciones por genero, al selecionar un genero se escribe en la consola y luego de una busqueda se imprimen en la pantalla.
 
+Ejemplo:
 ```
-Opción seleccionada: 2) Asignar prioridad a paciente
-Ingrese el nombre del paciente: Ana Martínez
-Seleccione el nuevo nivel de prioridad (Alto, Medio, Bajo): Alto
-```
-
-El sistema actualiza la prioridad de Ana Martínez a "Alto", asegurando que será una de las próximas pacientes en ser atendida.
-
-**Paso 3: Ver la Lista de Espera**
-
-El usuario revisa la lista de espera para ver todos los pacientes y sus prioridades.
-
-La lista muestra a Ana Martínez en la parte superior, indicando su prioridad alta y que es la siguiente en línea para recibir atención.
-
-**Paso 4: Atender al Siguiente Paciente**
-
-Ana Martínez es llamada para ser atendida basándose en su prioridad.
-
-```
-Opción seleccionada: 4) Atender al siguiente paciente
+Opción seleccionada: 2) BUSCAR POR GENERO
+=======================================
+          BUSQUEDA POR GENERO
+=======================================
+INGRESE EL GENERO DE LA CANCION: acoustic
 ```
 
-El sistema muestra que Ana Martínez está siendo atendida y la elimina de la lista de espera.
+Dentro de las canciones cargadas se buscan todas las que tengan un genero especifico, en el caso del ejemplo se buscan todas aquellas que sean de genero acoustic, y luego en la consola se muestran todas las canciones que sean del mismo genero.
+
+Ejemplo de salida en la consola:
+```
+CANCION: Waves of Panic
+ALBUM: The Shreds
+TEMPO: 166
+ARTISTAS: Corporate Hearts
+------------------------
+```
+
+**Opción 3: Buscar por artista**
+
+Se buscan las canciones por artista, al selecionar un artista se escribe en la consola el nombre del artista y luego de una busqueda se muestra en la consola las canciones en las que participo ese artista.
+
+Ejemplo:
+```
+Opción seleccionada: 3) BUSCAR POR ARTISTA
+========================================
+          BUSQUEDA POR ARTISTA
+========================================
+INGRESE EL NOMBRE DEL ARTISTA: SA
+```
+
+Dentro de las canciones cargadas se buscan todas las que tengan al artista buscado, en el caso del ejemplo se buscan todas las canciones en las que el artista "SA" haya participado, y luego en la consola se muestran todas sus canciones.
+
+Ejemplo de salida en la consola:
+```
+CANCION: Oora
+ALBUM: Oora
+TEMPO: 140
+ARTISTA BUSCADO: SA
+------------------------
+```
+
+**Opción 4: Buscar por tempo**
+
+Se busca una canción según su tempo, ya sean "Lentas", "Moderadas" o "Rapidas", se escribre en la consola el tempo deseado, y luego de una busqueda se muestran en la consola todas las canciones que tengan el tempo buscado.
+
+Ejemplo:
+```
+Opción seleccionada: 4) BUSCAR POR TEMPO
+========================================
+           BUSQUEDA POR TEMPO
+========================================
+INGRESE EL TEMPO DE LA CANCION (Lentas, Moderadas, Rapidas): Lentas
+```
+
+Dentro de las canciones cargadas se buscan todas las que tengan el tempo buscado, en el caso del ejemplo se buscan todas las canciones en las que el tempo sea lento ("Lentas"), y luego en la consola se muestran todas las canciones en el que el tempo sea lento.
+
+Ejemplo de salida en la consola:
+```
+CANCION: Jesus Lover of My Soul - Live
+ALBUM: Shout to the Lord (Live)
+TEMPO: 72
+ARTISTAS: Hillsong Worship, Integrity's Hosanna! Music, Darlene Zschech
+------------------------
+```
+
+**Opción 5: Salir**
+
+Al seleccionar la opción 5 se finaliza la ejecución del programa.
+
+Ejemplo:
+```
+Opción seleccionada: 5) SALIR
+```
