@@ -106,7 +106,9 @@ void buscarPorGenero(HashMap *SBG)
   // Busca en el mapa de géneros la lista de canciones asociadas al género ingresado
   Pair *par = searchMap(SBG, genero);
   
-  if (par != NULL) {
+  if(par == NULL) printf("NO SE ENCONTRO EL GENERO BUSCADO\n"); // Mensaje si no existe el genero buscado
+  else
+  {
     List* lista = (List *) par->value;
     Song *cancion = list_first(lista);
     long count = 0;
@@ -190,7 +192,9 @@ void buscarPorTempo(HashMap *SBT)
   // Busca en el mapa de tempo la lista de canciones asociadas al tempo ingresado
   Pair *par = searchMap(SBT, tempo);
   
-  if (par != NULL) {
+  if(par == NULL) printf("NO SE EXISTE EL TEMPO BUSCADO\n"); // Mensaje si no existe el tempo buscado
+  else
+  {
     List* lista = (List *) par->value;
     Song *cancion = list_first(lista);
     long count = 0;
