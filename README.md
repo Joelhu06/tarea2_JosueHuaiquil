@@ -1,5 +1,3 @@
-# tarea2_JosueHuaiquil
-
 # SPOTIFIND
 
 ## Descripción
@@ -18,11 +16,12 @@ Este sistema ha sido desarrollado en lenguaje C y puede ejecutarse fácilmente u
 
 ### Pasos para compilar y ejecutar:
 
-1. **Descarga y descomprime el** archivo `.zip` en una carpeta de tu elección.
+1. **Descarga y descomprime el** archivo `.zip` en una carpeta de tu elección o **clona el repositorio de Git Hub**.
 2. **Abre el proyecto en Visual Studio Code**
     - Inicia Visual Studio Code.
-    - Selecciona `Archivo > Abrir carpeta...` y elige la carpeta donde descomprimiste el proyecto.
-    3. **Compila el código**
+    - FORMA 1: Selecciona `Archivo > Abrir carpeta...` y elige la carpeta donde descomprimiste el proyecto.
+    - FORMA 2: Selecciona clonar repositorio usando el siguiente link: https://github.com/Joelhu06/tarea2_JosueHuaiquil.git
+3. **Compila el código**
     - Abre el archivo principal (por ejemplo, `main.c`).
     - Abre la terminal integrada (`Terminal > Nueva terminal`).
     - En la terminal, compila el programa con el siguiente comando (ajusta el nombre si el archivo principal tiene otro nombre):
@@ -52,14 +51,9 @@ Este sistema ha sido desarrollado en lenguaje C y puede ejecutarse fácilmente u
 
 - El primer dato no se muestra correctamente.
 
-### A mejorar:
-
-- Implementar una interfaz de usuario más amigable.
-- Permitir la edición de los datos de los pacientes.
-
 ## Ejemplo de uso
 
-Para el uso del programa existen varias opciones para selecionar, lascuales se mmuestran en el siguiente menu:
+Para el uso del programa existen varias opciones para selecionar, las cuales se muestran en el siguiente menú:
 
 ```
 ========================================

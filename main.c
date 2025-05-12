@@ -32,7 +32,6 @@ void mostrarMenuPrincipal()
   puts("========================================");
 }
 
-
 // Función para cargar las canciones desde un archivo CSV
 void cargarCanciones(HashMap *SBG, HashMap *SBA, HashMap *SBT) 
 {
@@ -93,36 +92,6 @@ void cargarCanciones(HashMap *SBG, HashMap *SBA, HashMap *SBT)
   fclose(archivo); // Cierra el archivo después de leer todas las líneas
 }
 
-void imprimirPrimerasCanciones(HashMap *mapa) {
-  Pair *par = firstMap(mapa);
-  while (par != NULL) {
-    printf("\n=== %s ===\n", (char *)par->key); // Clave del mapa: género, artista o tempo
-
-    List *lista = (List *)par->value;
-    int count = 0;
-
-    for (Song *cancion = list_first(lista); cancion != NULL && count < 10; cancion = list_next(lista)) {
-      printf("CANCION: %s\n", cancion->track_name);
-      printf("ALBUM: %s\n", cancion->album_name);
-      printf("TEMPO: %d\n", cancion->tempo);
-      printf("ARTISTAS: ");
-
-      // Imprimir artistas
-      int primer_artista = 1;
-      for (char *artista = list_first(cancion->artists); artista != NULL; artista = list_next(cancion->artists)) {
-        if (!primer_artista) printf(", ");
-        printf("%s", artista);
-        primer_artista = 0;
-      }
-
-      printf("\n------------------------\n");
-      count++;
-    }
-
-    par = nextMap(mapa);
-  }
-}
-
 // Función que busca las canciones por sus generos
 void buscarPorGenero(HashMap *SBG)
 {
@@ -134,6 +103,7 @@ void buscarPorGenero(HashMap *SBG)
   printf("INGRESE EL GENERO DE LA CANCION: ");
   scanf("%s", genero); // Lee el genero del teclado
 
+  // Busca en el mapa de géneros la lista de canciones asociadas al género ingresado
   Pair *par = searchMap(SBG, genero);
   
   if (par != NULL) {
@@ -178,12 +148,14 @@ void buscarPorArtista(HashMap *SBA)
   printf("INGRESE EL NOMBRE DEL ARTISTA: ");
   getchar(); // limpia el \n anterior
   fgets(artista, 100, stdin);
-  artista[strcspn(artista, "\n")] = '\0'; // elimina salto de línea
+  artista[strcspn(artista, "\n")] = '\0'; // Elimina salto de línea
 
+  // Busca en el mapa de artista la lista de canciones asociadas al artista ingresado
   Pair *pair = searchMap(SBA, artista);
-  if(pair == NULL) printf("NO SE ENCONTRO EL ARTISTA BUSCADO\n");
+  if(pair == NULL) printf("NO SE ENCONTRO EL ARTISTA BUSCADO\n"); // Mensaje si no exisste el artista buscado
   else
   {
+    // Extrae la lista de canciones asociadas desde el par encontrado
     List* lista = pair->value;
     Song *cancion = list_first(lista);
     long count = 0;
@@ -213,8 +185,9 @@ void buscarPorTempo(HashMap *SBT)
   char tempo[100];
   printf("INGRESE EL TEMPO DE LA CANCION (Lentas, Moderadas, Rapidas): ");
   getchar();
-  scanf("%s", tempo); // Lee el ID del teclado
+  scanf("%s", tempo); // Lee el tempo del teclado
 
+  // Busca en el mapa de tempo la lista de canciones asociadas al tempo ingresado
   Pair *par = searchMap(SBT, tempo);
   
   if (par != NULL) {
